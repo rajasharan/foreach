@@ -1,0 +1,43 @@
+USAGE
+
+#include "foreach.h"
+
+typedef Struct Element {
+        int key;
+        double value;
+} Element;
+
+int main()
+{
+        Element elems[5];
+        /* initialize elems */
+        int i;
+        for (i=0; i<5; i++)
+                elems[i].key = i;
+
+        Array *arr = create_array(elems, 5, sizeof(Element));
+        arr->foreach(arr, my_print);
+        return 0;
+}
+
+int my_print(void *elem)
+{
+        Element e = (Elemenet *) elem;
+
+        /* do stuff with e */
+        printf("%d\n", e->key);
+
+        return 0; /* SUCCESS */
+}
+
+
+COMPILING
+
+% gcc foreach.c test_foreach.c
+% ./a.out
+0
+1
+2
+3
+4
+
